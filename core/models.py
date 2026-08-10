@@ -31,6 +31,9 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     last_update = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return self.title
+
     class Meta:
         verbose_name = 'پست'
         verbose_name_plural = 'پست ها'
