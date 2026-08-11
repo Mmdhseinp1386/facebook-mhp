@@ -1,0 +1,11 @@
+{%extends 'core/layout.html'%}
+{%block title%}
+{{post.title}}
+{%endblock%}
+
+{%block main%}
+    <h2>{{post.title}}</h2>
+    <p>{{post.content}}</p>
+    <small>{{post.user.username}}</small>
+    <small>{{post.created_at}}</small>
+{%endblock%}

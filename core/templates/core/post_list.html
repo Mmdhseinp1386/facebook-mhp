@@ -1,23 +1,17 @@
+{%extends 'core/layout.html'%}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Post List</title>
-    <link rel="stylesheet" href="{% static 'css/style.css'%}">
-</head>
-<body>
-    <h1>Post List:</h1>
-    <ul>
+
+{%block title%}
+لیست پست ها
+{%endblock%}
+
+{%block main%}
+    <ul class="list-group m-4">
         {%for post in posts%}
-        <li>{{ post.title }}</li>
-        {{post.content}} <br>
-        {{post.user}}
-        <hr>
+        <li class="list-group-item"> <a class="nav-link" href="{% url 'post_detail' post_id=post.id%}">{{ post.title }}</a> </li>
         {% endfor %}
     </ul>
 
+{%endblock%}
+
 <img src="{%static 'picturefiles/tr.jpg'%}" alt="picture">
-</body> 
-</html>
