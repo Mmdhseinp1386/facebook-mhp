@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from core.models import User, Post
+from core.models import User, Post, Comment
 
 def say_hello(request):
     return HttpResponse('<h1 style="color: red; text-align:center">Hello world!</h1>')
@@ -13,7 +13,7 @@ def home(request, username):
     return render(request, 'core/index.html', context=context)
 
 def post_list(request):
-    posts = Post.objects.all()
+    posts = Post.objects.all().order_by('-created_at')
     context = {
         'posts': posts
     }

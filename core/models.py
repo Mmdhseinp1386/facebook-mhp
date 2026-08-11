@@ -18,7 +18,7 @@ class User(models.Model):
     income = models.DecimalField(max_digits=8, decimal_places=2, verbose_name='درآمد')
 
     def __str__(self):
-        return f'{self.username}: {self.phone}'
+        return f'{self.username}: {self.email}'
 
     class Meta:
         verbose_name = 'کاربر'
@@ -29,6 +29,7 @@ class Post(models.Model):
     content = models.TextField(verbose_name='محتوا')
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='کاربر')
     created_at = models.DateTimeField(auto_now_add=True)
+    image = models.ImageField(upload_to='post_images/', null=True, blank=True)
     last_update = models.DateTimeField(auto_now=True)
 
     def __str__(self):
@@ -37,3 +38,15 @@ class Post(models.Model):
     class Meta:
         verbose_name = 'پست'
         verbose_name_plural = 'پست ها'
+
+class Comment(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='کاربر')
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, verbose_name='پست')
+    body = models.CharField(max_length=1024, verbose_name='توضیحات  ')
+
+    def __str__(self):
+        return f'{self.user.username}: {self.body}'
+
+    class Meta:
+        verbose_name = 'کامنت'
+        verbose_name_plural = 'کامنت ها'
