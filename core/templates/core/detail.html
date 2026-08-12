@@ -4,8 +4,23 @@
 {%endblock%}
 
 {%block main%}
-    <h2>{{post.title}}</h2>
-    <p>{{post.content}}</p>
-    <small>{{post.user.username}}</small>
-    <small>{{post.created_at}}</small>
+
+    <div class="card">
+        <div class="card-header">
+            {{post.title}}
+        </div>
+        <div class="card-body">
+            <div class="card-text">
+                {{post.content}}
+            </div>
+        </div>
+        <button type="button" class="btn btn-outline-danger" style="width: 120px;">حذف</button>   
+        <button type="button" class="btn btn-outline-warning" style="width: 120px;">ویرایش</button>   
+        <div class="card-footer d-flex justify-content-between">
+            <small>{{post.user.username}}</small>
+            <small>{{post.created_at}}</small>
+        </div>
+        
+    </div>
 {%endblock%}
+
