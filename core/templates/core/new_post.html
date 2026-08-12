@@ -1,25 +1,16 @@
 {%extends 'core/layout.html'%}
 {%block title%}
-پست جدید1
+پست جدید
 {%endblock%}
 
 {%block main%}
 
 <form action="{% url 'new_post'%}" method="post">
     {%csrf_token%}
-    <label>عنوان</label>
-    <input type="text" name="title">
     
-    <label>محتوا</label>
-    <textarea name="content" rows="5" cols="20"></textarea>
-
-    <label>نام کاربری</label>
-    <input type="text" name="username">
-
-    <label>تصویر</label>
-    <input type="file" name="picture">
-
-    <input type="submit" value="ایجاد پست جدید">
+    {{ form.as_p }}
+    
+    <input type="submit" value="ایجاد پست" class="btn btn-primary ">
 </form>
 
 {%endblock%}

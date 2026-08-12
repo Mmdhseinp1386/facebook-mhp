@@ -1,26 +1,63 @@
-{%extends 'core/layout.html'%}
-{%block title%}
-{{post.title}}
-{%endblock%}
+{% extends 'core/layout.html' %}
+{% load static %}
 
-{%block main%}
+{% block title %}
+{{ post.title }}
+{% endblock %}
 
-    <div class="card">
-        <div class="card-header">
-            {{post.title}}
+{% block main %}
+<div class="card shadow-sm">
+    <div class="card-header fs-4 fw-bold text-end">
+        {{ post.title }}
+    </div>
+
+    <div class="card-body">
+        <div class="row align-items-center">
+            
+            <div class="col-md-8 text-end">
+                <div class="card-text fs-5">
+                    {{ post.content }}
+                </div>
+                
+                <div>
+                    <small>نویسنده: {{ post.user.username }}</small><br>
+                    <small>تاریخ: {{ post.created_at }}</small>
+                </div>
+                
+            </div>
+
+            <div class="col-md-4 text-center">
+                <img src="{% static 'picturefiles/digi.jpg' %}" alt="picture" class="img-fluid rounded border shadow-sm" style="max-height: 250px;">
+            </div>
+
         </div>
-        <div class="card-body">
-            <div class="card-text">
-                {{post.content}}
+    </div>
+
+    <div class="card-footer d-flex gap-2 mt-3">
+        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            حذف
+        </button>
+        <a href="" class="btn btn-warning text-white shadow-sm" style="width: 80px;">ویرایش</a>
+    </div>
+</div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel"></h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    آیا از حذف این پست اطمینان دارید؟
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">لغو</button>
+                    <a href="{% url 'post_delete' post_id=post.id %}" class="btn btn-danger shadow-sm" style="width: 60px;">حذف</a>
+                </div>
             </div>
         </div>
-        <button type="button" class="btn btn-outline-danger" style="width: 120px;">حذف</button>   
-        <button type="button" class="btn btn-outline-warning" style="width: 120px;">ویرایش</button>   
-        <div class="card-footer d-flex justify-content-between">
-            <small>{{post.user.username}}</small>
-            <small>{{post.created_at}}</small>
-        </div>
-        
     </div>
-{%endblock%}
-
+{% endblock %}

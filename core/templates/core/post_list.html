@@ -5,13 +5,18 @@
 لیست پست ها
 {%endblock%}
 
+{%block h1%}
+    <div class="fw-bold fs-2 pe-5">
+        لیست پست ها:
+    </div>
+{%endblock%}
+
 {%block main%}
     <ul class="list-group m-4">
         {%for post in posts%}
-        <li class="list-group-item"> <a class="nav-link" href="{% url 'post_detail' post_id=post.id%}">{{ post.title }}</a> </li>
+        <li class="list-group-item"> <a class="text-primary text-opacity-75 custom-link" href="{% url 'post_detail' post_id=post.id%}">{{ post.title }}</a> </li>
         {% endfor %}
     </ul>
-
+<img class="pe-xl-5" src="{%static 'picturefiles/tr.jpg'%}" alt="picture">
 {%endblock%}
 
-<img src="{%static 'picturefiles/tr.jpg'%}" alt="picture">

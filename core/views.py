@@ -1,6 +1,8 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib import messages
 from django.http import HttpResponse
 from core.models import User, Post, Comment
+from core.forms import NewPostForm
 
 def say_hello(request):
     return HttpResponse('<h1 style="color: red; text-align:center">Hello world!</h1>')
@@ -20,18 +22,21 @@ def post_list(request):
     return render(request, 'core/post_list.html', context=context)
 
 def post_detail(request, post_id):
-    post = Post.objects.get(id=post_id)
+    post = get_object_or_404(Post, pk=post_id)
     context = {
         'post': post 
     }
     return render(request, 'core/detail.html', context=context)
 
 def new_post(request):
-    if request.method == 'POST':
-        title = request.POST.get('title')
-        content = request.POST.get('content')
-        username = request.POST.get('username')
-        user = User.objects.filter(username=username).first()
-        new_post = Post.objects.create(title=title, content=content, user=user)
-        return redirect('post_list')
-    return render(request, 'core/new_post.html')
+    form = NewPostForm()
+    context = {
+        'form':form
+    }
+    return render(request, 'core/new_post.html', context=context)
+
+def post_delete(request, post_id):
+    post = get_object_or_404(Post, pk=post_id)
+    post.delete()
+    messages.success(request, 'پست شما با موفقیت حذف شد')
+    return redirect('post_list')

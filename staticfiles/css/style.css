@@ -1,9 +1,5 @@
-li{
-    background-color: aquamarine;
-    color: brown;
-}
-
-h1{
-    background-color: cadetblue;
-    color: red;
+.custom-link {
+    text-decoration: underline; 
+    text-underline-offset: 5px; 
+    text-decoration-color: #0dcaf0; 
 }
